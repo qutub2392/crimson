@@ -1,0 +1,4 @@
+{% load static%}
+.body {
+    background-image: url("img/q.png");
+}

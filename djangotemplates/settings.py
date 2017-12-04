@@ -25,7 +25,7 @@ SECRET_KEY = 'q2!1iwm^9jlx@4u66k(ke!_=(5uacvl@%%(g&6=$$m1u5n=*4-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [qutub2392.pythonanywhere.com]
+ALLOWED_HOSTS = ['qutub2392.pythonanywhere.com','localhost','127.0.0.1']
 
 
 # Application definition
@@ -50,7 +50,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
 ROOT_URLCONF = 'djangotemplates.urls'
 
 TEMPLATES = [

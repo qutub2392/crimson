@@ -1,11 +1,6 @@
 
 {% load static %}
-
-
-
-
-
-
+{% block content %}
 <!DOCTYPE html>
 <html>
 <title>Crimson test</title>
@@ -14,30 +9,14 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
-body, html {
-    height: 100%;
-    line-height: 1.8;
-}
-/* Full height image header */
-.bgimg-1 {
-    background-position: center;
-    background-size: cover;
-    background-image:url('/static/img/mac.jpg');
-
-    min-height: 100%;
-}
-.w3-bar .w3-button {
-    padding: 16px;
-}
-</style>
+<link rel="stylesheet" href="{% static 'css/main.css'%}">
 <body>
 
 <!-- Navbar (sit on top) -->
 <div class="w3-top">
   <div class="w3-bar w3-white w3-card" id="myNavbar">
-    <a href="#home" class="w3-bar-item w3-button w3-wide">Crimson Tech</a>
+    <div class="Crimson">
+      <a href="#home" class="w3-bar-item w3-button w3-wide">Crimson Tech</a> </div>
     <!-- Right-sided navbar links -->
     <div class="w3-right w3-hide-small">
       <a href="#about" class="w3-bar-item w3-button">ABOUT</a>
@@ -63,7 +42,7 @@ body, html {
   <a href="#xxx" onclick="w3_close()" class="w3-bar-item w3-button">***</a>
   <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">CONTACT</a>
 </nav>
-
+{% endblock %}
 <!-- Header with full-height image -->
 <header class="bgimg-1 w3-display-container w3-grayscale-min" id="home">
   <div class="w3-display-left w3-text-white" style="padding:48px">
@@ -82,7 +61,7 @@ body, html {
     <i class="fa fa-linkedin w3-hover-opacity"></i>
   </div>
 </header>
-    
+
     <!-- Team Section -->
 <div class="w3-container" style="padding:128px 16px" id="team">
   <h3 class="w3-center">THE TEAM</h3>
@@ -94,7 +73,7 @@ body, html {
         <div class="w3-container">
           <h3>Qutub Rehman</h3>
           <p class="w3-opacity">CEO & Founder</p>
-          <p></p>
+          <p>A Designer, a traveler, an entrepreneur, a founder, a developer, a marketer and everything in between </p>
           <p><button class="w3-button w3-light-grey w3-block"><i class="fa fa-envelope"></i> Contact</button></p>
         </div>
       </div>
@@ -112,6 +91,34 @@ body, html {
     </div>
     </div>
     </div>
+
+
+
+
+  <!-- PRODUCTS Section -->
+  <div class="w3-container,w3-grayscale" style="padding:128px 16px" id="PRODUCTS">
+
+      <h3 class="w3-center">OUR PRODUCTS</h3>
+      <p class="w3-center w3-large">What we've done for people</p>
+
+
+
+          <img src="{% static "img/keys.png" %}" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="Easy Key">
+
+      </div>
+    </div>
+
+
+
+    <!-- Modal for full size images on click-->
+    <div id="modal01" class="w3-modal w3-black" onclick="this.style.display='none'">
+      <span class="w3-button w3-xxlarge w3-black w3-padding-large w3-display-topright" title="Close Modal Image">×</span>
+      <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
+        <img id="img01" class="w3-image">
+
+      </div>
+    </div>
+
     <!-- Contact Section -->
 <div class="w3-container w3-light-grey" style="padding:128px 16px" id="contact">
   <h3 class="w3-center">CONTACT</h3>
@@ -122,7 +129,7 @@ body, html {
       <p><i class="fa fa-phone fa-fw w3-xxlarge w3-margin-right"></i> Phone: +91 8553056306</p>
       <p><i class="fa fa-envelope fa-fw w3-xxlarge w3-margin-right"> </i> Email: crimsontech23@gmail.com</p>
       <br>
-      <form action="/action_page.php" target="_blank">
+    <!--  <form action="/action_page.php" target="_blank">
         <p><input class="w3-input w3-border" type="text" placeholder="Name" required name="Name"></p>
         <p><input class="w3-input w3-border" type="text" placeholder="Email" required name="Email"></p>
         <p><input class="w3-input w3-border" type="text" placeholder="Subject" required name="Subject"></p>
@@ -134,12 +141,22 @@ body, html {
         </p>
       </form>
     </div>
-    <div class="w3-half">
-      <!-- Add Google Maps -->
+    <div>-->
+
+      <form method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <div class="form-actions">
+            <button type="submit">Send</button>
+          </div>
+      </form>
+    </div>
+  <div class="w3-half">
+      <!-- Add Google Maps-->
       <div id="googleMap" class="w3-greyscale-max" style="width:100%;height:510px;"></div>
     </div>
   </div>
-</div>
+</div>-->
     <footer class="w3-center w3-black w3-padding-64">
   <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
   <div class="w3-xlarge w3-section">
@@ -150,9 +167,9 @@ body, html {
     <i class="fa fa-twitter w3-hover-opacity"></i>
     <i class="fa fa-linkedin w3-hover-opacity"></i>
   </div>
-  
+
 </footer>
-    <!-- Add Google Maps -->
+    <!-- Add Google Maps-->
 <script>
 function myMap()
 {

@@ -1,51 +1,52 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
+from django.core.mail import EmailMessage
+from django.shortcuts import redirect
+from django.template import Context
+from django.template.loader import get_template
+from django.core.mail import send_mail, BadHeaderError
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect
+from .forms import ContactForm
 
-class HomePageView(TemplateView):
-    template_name = "index.html"
+def index(request):
+    if request.method == 'GET':
+        form = ContactForm()
+    else:
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            subject = form.cleaned_data['subject']
+            from_email = form.cleaned_data['from_email']
+            message = form.cleaned_data['message']
+            try:
+                send_mail(subject, message, from_email, ['qutub2392@gmail.com'])
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
+            return redirect('index')
+    return render(request, "index.html", {'form': form})
+
 
 
 class AboutPageView(TemplateView):
     template_name = "about.html"
 
-# Add this view
-class DataPageView(TemplateView):
-    def get(self, request, **kwargs):
-        context = {
-            'data': [
-                {
-                    'name': 'Celeb 1',
-                    'worth': '3567892'
-                },
-                {
-                    'name': 'Celeb 2',
-                    'worth': '23000000'
-                },
-                {
-                    'name': 'Celeb 3',
-                    'worth': '1000007'
-                },
-                {
-                    'name': 'Celeb 4',
-                    'worth': '456789'
-                },
-                {
-                    'name': 'Celeb 5',
-                    'worth': '7890000'
-                },
-                {
-                    'name': 'Celeb 6',
-                    'worth': '12000456'
-                },
-                {
-                    'name': 'Celeb 7',
-                    'worth': '896000'
-                },
-                {
-                    'name': 'Celeb 8',
-                    'worth': '670000'
-                }
-            ]
-        }
 
-        return render(request, 'data.html', context)
+def contact(request):
+    if request.method == 'GET':
+        form = ContactForm()
+    else:
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            subject = form.cleaned_data['subject']
+            from_email = form.cleaned_data['from_email']
+            message = form.cleaned_data['message']
+            try:
+                send_mail(subject, message, from_email, ['qutub2392@gmail.com'])
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
+            return redirect('contact')
+    return render(request, "contact.html", {'form': form})
+
+
+def success(request):
+    return HttpResponse('Success! Thank you for your message.')
